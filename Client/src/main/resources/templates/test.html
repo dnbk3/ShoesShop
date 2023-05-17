@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input name="numberOne" type="number" placeholder="Số hạng 1" ></input>
+    + 
+    <input name="numberTwo" type="number" placeholder="Số hạng 2"></input>
+    = 
+    <input name="sum" type="number" placeholder="Kết quả" readonly></input>
+    <button name="bbb" style="display: block; margin-top: 10px">Tổng</button>
+    <script>
+        var button = document.getElementsByName("bbb");
+        button[0].onclick = function(){
+            var one = document.getElementsByName("numberOne")[0].value;
+            var two = document.getElementsByName("numberTwo")[0].value;
+            var sum = Number(one) + Number(two);
+            document.getElementsByName("sum")[0].value = sum;
+        }
+    </script>
+</body>
+</html>

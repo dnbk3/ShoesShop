@@ -1,0 +1,435 @@
+{
+	"info": {
+		"_postman_id": "d0a20e92-2c24-4b8e-ba41-514d42184a0f",
+		"name": "HDV - product",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21824934",
+		"_collection_link": "https://lively-space-127763.postman.co/workspace/HDV~990c252a-8bc7-438b-8e09-b971df5fd54e/collection/21824934-d0a20e92-2c24-4b8e-ba41-514d42184a0f?action=share&creator=21824934&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "thêm mới sản phẩm",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwidXNlcl9pZCI6IjEiLCJwaG9uZSI6IjA5ODc2NTQzMjEiLCJleHAiOjE2ODQyMjkxNzQsImlhdCI6MTY4MTYzNzE3NCwiZW1haWwiOm51bGx9.QlAdIEIPW5PKmsgOlOSvqY3q9nx5O_isM6gLkVrs9KNibhDfk1J5UssJ65rq3NgnbBs_nx8L_rkG3_C9135Rmw",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"categoryId\": 1,\r\n  \"description\": \"Hàng Oder,Chất lượng tốt nhất,Loại siêu cấp\",\r\n  \"discount\": 800000,\r\n  \"imageUrls\": [\r\n   \"https://ik.imagekit.io/hg4ywf55g2/wsxc1679650934005_4_XjVgUwoQY.jpg\",\r\n        \"https://ik.imagekit.io/hg4ywf55g2/wsxc1679650934005_2-600x600_X4lESU52v.jpg\",\r\n        \"https://ik.imagekit.io/hg4ywf55g2/wsxc1679650934005_1-600x600_ehEWk1dmG.jpg\",\r\n        \"https://ik.imagekit.io/hg4ywf55g2/wsxc1679650934005_0_3so-hkOUB.jpg\"\r\n  ],\r\n  \"name\": \" Giày bánh mì Sanrio trẻ em nhiều màu\",\r\n  \"price\": 800000,\r\n  \"quantity\": 50,\r\n  \"size\": 40,\r\n  \"supplierId\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8082/core/product/add",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"core",
+						"product",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "lấy danh sách các sản phẩm",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwidXNlcl9pZCI6IjEiLCJwaG9uZSI6IjA5ODc2NTQzMjEiLCJleHAiOjE2ODQyMjkxNzQsImlhdCI6MTY4MTYzNzE3NCwiZW1haWwiOm51bGx9.QlAdIEIPW5PKmsgOlOSvqY3q9nx5O_isM6gLkVrs9KNibhDfk1J5UssJ65rq3NgnbBs_nx8L_rkG3_C9135Rmw",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"categoryId\": 1,\r\n  \"description\": \"Hàng Oder,Chất lượng tốt nhất,Loại siêu cấp\",\r\n  \"discount\": 2590000,\r\n  \"imageUrls\": [\r\n     \"https://ik.imagekit.io/hg4ywf55g2/wsxc1679931848107_3-600x450_-_Copy_PDrBK_7k3.jpg\",\r\n        \"https://ik.imagekit.io/hg4ywf55g2/wsxc1679931848107_3-600x450_a7vOPI3m6.jpg\",\r\n        \"https://ik.imagekit.io/hg4ywf55g2/wsxc1679931848107_2-600x450_-_Copy_wqcWyGal4n.jpg\",\r\n        \"https://ik.imagekit.io/hg4ywf55g2/wsxc1679931848107_0_InqsYhoAw.jpg\"\r\n  ],\r\n  \"name\": \"Giày LV Louis Vuitton siêu cấp Virgil Abloh thiết kế trắng gót vàng\",\r\n  \"price\": 2590000,\r\n  \"quantity\": 50,\r\n  \"size\": 40,\r\n  \"supplierId\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8082/core/product/get-all",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"core",
+						"product",
+						"get-all"
+					],
+					"query": [
+						{
+							"key": "keyword",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "lấy danh sách các sản phẩm theo categoryId",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwidXNlcl9pZCI6IjEiLCJwaG9uZSI6IjA5ODc2NTQzMjEiLCJleHAiOjE2ODQyMjkxNzQsImlhdCI6MTY4MTYzNzE3NCwiZW1haWwiOm51bGx9.QlAdIEIPW5PKmsgOlOSvqY3q9nx5O_isM6gLkVrs9KNibhDfk1J5UssJ65rq3NgnbBs_nx8L_rkG3_C9135Rmw",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"categoryId\": 1,\r\n  \"description\": \"Hàng Oder,Chất lượng tốt nhất,Loại siêu cấp\",\r\n  \"discount\": 2590000,\r\n  \"imageUrls\": [\r\n     \"https://ik.imagekit.io/hg4ywf55g2/wsxc1679931848107_3-600x450_-_Copy_PDrBK_7k3.jpg\",\r\n        \"https://ik.imagekit.io/hg4ywf55g2/wsxc1679931848107_3-600x450_a7vOPI3m6.jpg\",\r\n        \"https://ik.imagekit.io/hg4ywf55g2/wsxc1679931848107_2-600x450_-_Copy_wqcWyGal4n.jpg\",\r\n        \"https://ik.imagekit.io/hg4ywf55g2/wsxc1679931848107_0_InqsYhoAw.jpg\"\r\n  ],\r\n  \"name\": \"Giày LV Louis Vuitton siêu cấp Virgil Abloh thiết kế trắng gót vàng\",\r\n  \"price\": 2590000,\r\n  \"quantity\": 50,\r\n  \"size\": 40,\r\n  \"supplierId\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8082/core/product/get-by-categoryId?categoryId=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"core",
+						"product",
+						"get-by-categoryId"
+					],
+					"query": [
+						{
+							"key": "categoryId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "lấy danh sách theo supplerId",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwidXNlcl9pZCI6IjEiLCJwaG9uZSI6IjA5ODc2NTQzMjEiLCJleHAiOjE2ODQyMjkxNzQsImlhdCI6MTY4MTYzNzE3NCwiZW1haWwiOm51bGx9.QlAdIEIPW5PKmsgOlOSvqY3q9nx5O_isM6gLkVrs9KNibhDfk1J5UssJ65rq3NgnbBs_nx8L_rkG3_C9135Rmw",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"categoryId\": 1,\r\n  \"description\": \"Hàng Oder,Chất lượng tốt nhất,Loại siêu cấp\",\r\n  \"discount\": 2590000,\r\n  \"imageUrls\": [\r\n     \"https://ik.imagekit.io/hg4ywf55g2/wsxc1679931848107_3-600x450_-_Copy_PDrBK_7k3.jpg\",\r\n        \"https://ik.imagekit.io/hg4ywf55g2/wsxc1679931848107_3-600x450_a7vOPI3m6.jpg\",\r\n        \"https://ik.imagekit.io/hg4ywf55g2/wsxc1679931848107_2-600x450_-_Copy_wqcWyGal4n.jpg\",\r\n        \"https://ik.imagekit.io/hg4ywf55g2/wsxc1679931848107_0_InqsYhoAw.jpg\"\r\n  ],\r\n  \"name\": \"Giày LV Louis Vuitton siêu cấp Virgil Abloh thiết kế trắng gót vàng\",\r\n  \"price\": 2590000,\r\n  \"quantity\": 50,\r\n  \"size\": 40,\r\n  \"supplierId\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8082/core/product/get-by-supplier?supplierId=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"core",
+						"product",
+						"get-by-supplier"
+					],
+					"query": [
+						{
+							"key": "keyword",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "supplierId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "lấy danh sách sản phẩm bán chạy",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwidXNlcl9pZCI6IjEiLCJwaG9uZSI6IjA5ODc2NTQzMjEiLCJleHAiOjE2ODQyMjkxNzQsImlhdCI6MTY4MTYzNzE3NCwiZW1haWwiOm51bGx9.QlAdIEIPW5PKmsgOlOSvqY3q9nx5O_isM6gLkVrs9KNibhDfk1J5UssJ65rq3NgnbBs_nx8L_rkG3_C9135Rmw",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"categoryId\": 1,\r\n  \"description\": \"Hàng Oder,Chất lượng tốt nhất,Loại siêu cấp\",\r\n  \"discount\": 2590000,\r\n  \"imageUrls\": [\r\n     \"https://ik.imagekit.io/hg4ywf55g2/wsxc1679931848107_3-600x450_-_Copy_PDrBK_7k3.jpg\",\r\n        \"https://ik.imagekit.io/hg4ywf55g2/wsxc1679931848107_3-600x450_a7vOPI3m6.jpg\",\r\n        \"https://ik.imagekit.io/hg4ywf55g2/wsxc1679931848107_2-600x450_-_Copy_wqcWyGal4n.jpg\",\r\n        \"https://ik.imagekit.io/hg4ywf55g2/wsxc1679931848107_0_InqsYhoAw.jpg\"\r\n  ],\r\n  \"name\": \"Giày LV Louis Vuitton siêu cấp Virgil Abloh thiết kế trắng gót vàng\",\r\n  \"price\": 2590000,\r\n  \"quantity\": 50,\r\n  \"size\": 40,\r\n  \"supplierId\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8082/core/product/top",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"core",
+						"product",
+						"top"
+					],
+					"query": [
+						{
+							"key": "keyword",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "lấy danh sách sản phẩm theo category, giá và theo thương hiệu",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwidXNlcl9pZCI6IjEiLCJwaG9uZSI6IjA5ODc2NTQzMjEiLCJleHAiOjE2ODQyMjkxNzQsImlhdCI6MTY4MTYzNzE3NCwiZW1haWwiOm51bGx9.QlAdIEIPW5PKmsgOlOSvqY3q9nx5O_isM6gLkVrs9KNibhDfk1J5UssJ65rq3NgnbBs_nx8L_rkG3_C9135Rmw",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"categoryId\": 1,\r\n  \"description\": \"Hàng Oder,Chất lượng tốt nhất,Loại siêu cấp\",\r\n  \"discount\": 2590000,\r\n  \"imageUrls\": [\r\n     \"https://ik.imagekit.io/hg4ywf55g2/wsxc1679931848107_3-600x450_-_Copy_PDrBK_7k3.jpg\",\r\n        \"https://ik.imagekit.io/hg4ywf55g2/wsxc1679931848107_3-600x450_a7vOPI3m6.jpg\",\r\n        \"https://ik.imagekit.io/hg4ywf55g2/wsxc1679931848107_2-600x450_-_Copy_wqcWyGal4n.jpg\",\r\n        \"https://ik.imagekit.io/hg4ywf55g2/wsxc1679931848107_0_InqsYhoAw.jpg\"\r\n  ],\r\n  \"name\": \"Giày LV Louis Vuitton siêu cấp Virgil Abloh thiết kế trắng gót vàng\",\r\n  \"price\": 2590000,\r\n  \"quantity\": 50,\r\n  \"size\": 40,\r\n  \"supplierId\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8082/core/product/search?keyword=Sanrio&categoryId=1&brandId=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"core",
+						"product",
+						"search"
+					],
+					"query": [
+						{
+							"key": "keyword",
+							"value": "Sanrio"
+						},
+						{
+							"key": "categoryId",
+							"value": "1"
+						},
+						{
+							"key": "brandId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "lấy danh sách các sản phẩm liên quan",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwidXNlcl9pZCI6IjEiLCJwaG9uZSI6IjA5ODc2NTQzMjEiLCJleHAiOjE2ODQyMjkxNzQsImlhdCI6MTY4MTYzNzE3NCwiZW1haWwiOm51bGx9.QlAdIEIPW5PKmsgOlOSvqY3q9nx5O_isM6gLkVrs9KNibhDfk1J5UssJ65rq3NgnbBs_nx8L_rkG3_C9135Rmw",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"categoryId\": 1,\r\n  \"description\": \"Hàng Oder,Chất lượng tốt nhất,Loại siêu cấp\",\r\n  \"discount\": 2590000,\r\n  \"imageUrls\": [\r\n     \"https://ik.imagekit.io/hg4ywf55g2/wsxc1679931848107_3-600x450_-_Copy_PDrBK_7k3.jpg\",\r\n        \"https://ik.imagekit.io/hg4ywf55g2/wsxc1679931848107_3-600x450_a7vOPI3m6.jpg\",\r\n        \"https://ik.imagekit.io/hg4ywf55g2/wsxc1679931848107_2-600x450_-_Copy_wqcWyGal4n.jpg\",\r\n        \"https://ik.imagekit.io/hg4ywf55g2/wsxc1679931848107_0_InqsYhoAw.jpg\"\r\n  ],\r\n  \"name\": \"Giày LV Louis Vuitton siêu cấp Virgil Abloh thiết kế trắng gót vàng\",\r\n  \"price\": 2590000,\r\n  \"quantity\": 50,\r\n  \"size\": 40,\r\n  \"supplierId\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8082/core/product/1/related",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"core",
+						"product",
+						"1",
+						"related"
+					],
+					"query": [
+						{
+							"key": "keyword",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "lấy 1 sản phẩm theo id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwidXNlcl9pZCI6IjEiLCJwaG9uZSI6IjA5ODc2NTQzMjEiLCJleHAiOjE2ODQyMjkxNzQsImlhdCI6MTY4MTYzNzE3NCwiZW1haWwiOm51bGx9.QlAdIEIPW5PKmsgOlOSvqY3q9nx5O_isM6gLkVrs9KNibhDfk1J5UssJ65rq3NgnbBs_nx8L_rkG3_C9135Rmw",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"categoryId\": 1,\r\n  \"description\": \"Hàng Oder,Chất lượng tốt nhất,Loại siêu cấp\",\r\n  \"discount\": 2590000,\r\n  \"imageUrls\": [\r\n     \"https://ik.imagekit.io/hg4ywf55g2/wsxc1679931848107_3-600x450_-_Copy_PDrBK_7k3.jpg\",\r\n        \"https://ik.imagekit.io/hg4ywf55g2/wsxc1679931848107_3-600x450_a7vOPI3m6.jpg\",\r\n        \"https://ik.imagekit.io/hg4ywf55g2/wsxc1679931848107_2-600x450_-_Copy_wqcWyGal4n.jpg\",\r\n        \"https://ik.imagekit.io/hg4ywf55g2/wsxc1679931848107_0_InqsYhoAw.jpg\"\r\n  ],\r\n  \"name\": \"Giày LV Louis Vuitton siêu cấp Virgil Abloh thiết kế trắng gót vàng\",\r\n  \"price\": 2590000,\r\n  \"quantity\": 50,\r\n  \"size\": 40,\r\n  \"supplierId\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8082/core/product/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"core",
+						"product",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "cập nhật sản phẩm",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwidXNlcl9pZCI6IjEiLCJwaG9uZSI6IjA5ODc2NTQzMjEiLCJleHAiOjE2ODQyMjkxNzQsImlhdCI6MTY4MTYzNzE3NCwiZW1haWwiOm51bGx9.QlAdIEIPW5PKmsgOlOSvqY3q9nx5O_isM6gLkVrs9KNibhDfk1J5UssJ65rq3NgnbBs_nx8L_rkG3_C9135Rmw",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"description\": \"Hàng Oder, Chất lượng tốt nhất, Loại siêu cấp\",\r\n  \"discount\": 2090000,\r\n  \"imageUrls\": [\r\n     \"https://ik.imagekit.io/hg4ywf55g2/wsxc1679931848107_3-600x450_-_Copy_PDrBK_7k3.jpg\",\r\n        \"https://ik.imagekit.io/hg4ywf55g2/wsxc1679931848107_3-600x450_a7vOPI3m6.jpg\",\r\n        \"https://ik.imagekit.io/hg4ywf55g2/wsxc1679931848107_2-600x450_-_Copy_wqcWyGal4n.jpg\",\r\n        \"https://ik.imagekit.io/hg4ywf55g2/wsxc1679931848107_0_InqsYhoAw.jpg\"\r\n  ],\r\n  \"name\": \"Giày LV Louis Vuitton siêu cấp Virgil Abloh thiết kế trắng gót vàng\",\r\n  \"price\": 2590000,\r\n  \"quantity\": 50,\r\n  \"size\": 40,\r\n  \"supplierId\": 2,\r\n  \"categoryId\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8082/core/product/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"core",
+						"product",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "xóa sản phẩm",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwidXNlcl9pZCI6IjEiLCJwaG9uZSI6IjA5ODc2NTQzMjEiLCJleHAiOjE2ODQyMjkxNzQsImlhdCI6MTY4MTYzNzE3NCwiZW1haWwiOm51bGx9.QlAdIEIPW5PKmsgOlOSvqY3q9nx5O_isM6gLkVrs9KNibhDfk1J5UssJ65rq3NgnbBs_nx8L_rkG3_C9135Rmw",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"description\": \"Hàng Oder, Chất lượng tốt nhất, Loại siêu cấp\",\r\n  \"discount\": 2090000,\r\n  \"imageUrls\": [\r\n     \"https://ik.imagekit.io/hg4ywf55g2/wsxc1679931848107_3-600x450_-_Copy_PDrBK_7k3.jpg\",\r\n        \"https://ik.imagekit.io/hg4ywf55g2/wsxc1679931848107_3-600x450_a7vOPI3m6.jpg\",\r\n        \"https://ik.imagekit.io/hg4ywf55g2/wsxc1679931848107_2-600x450_-_Copy_wqcWyGal4n.jpg\",\r\n        \"https://ik.imagekit.io/hg4ywf55g2/wsxc1679931848107_0_InqsYhoAw.jpg\"\r\n  ],\r\n  \"name\": \"Giày LV Louis Vuitton siêu cấp Virgil Abloh thiết kế trắng gót vàng\",\r\n  \"price\": 2590000,\r\n  \"quantity\": 50,\r\n  \"size\": 40,\r\n  \"supplierId\": 2,\r\n  \"categoryId\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8082/core/product/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"core",
+						"product",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

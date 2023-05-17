@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns=http://www.w3.org/1999/xhtml xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>QUẢN LÝ USER</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/main3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="app">
+        <div class="editEmployeeModal ">
+            <div class="modal-dialog ">
+                <div class="modal-content ">
+                    <div>
+                        <div class="modal-header ">
+                            <h4 class="modal-title ">Edit User</h4>
+                            <button type='submit' class="close " data-dismiss="modal " aria-hidden="true ">&times;</button>
+                            <!-- <input style="display: none " value="${index} " name="index " type="text " /> -->
+                        </div>
+                    </div>
+                    <form id="formEditCus" action="newcustomer" method="post">
+                        <div class="modal-body ">
+                            <div class="form-column-2">
+                                <div class="form-group " style="width: 49%;">
+                                    <label class="label ">ID</label>
+                                    <input id="inputId" value="" name="customerId" type="text " class="form-control " readonly required>
+                                </div>
+                                <div class="form-group " style="width: 49%;">
+                                    <label class="label ">Name</label>
+                                    <input value="" name="name" type="text " id="inputName" class="form-control " required>
+                                </div>
+                            </div>
+
+
+                            <div class="form-column-2">
+                                <div class="form-group " style="width: 49%;">
+                                    <label class="label ">Phone</label>
+                                    <input value="" name="phone" id="inputPhone" type="text " class="form-control ">
+                                </div>
+
+
+                                <div class="form-group " style="width: 49%;">
+                                    <label class="label ">PassWord</label>
+                                    <input id="inputPass" value="" name="password" type="password" class="form-control ">
+                                </div>
+                            </div>
+
+                            <div class="form-column-2">
+                                <div class="form-group " style="width: 49%;">
+                                    <label class="label ">Birthday</label>
+                                    <input id="inputBirthday" value="2023-05-08" name="birthday" type="date" class="form-control " required>
+                                </div>
+
+                                <div class="form-group " style="width: 49%;">
+                                    <label class="label ">Email</label>
+                                    <input id="inputEmail" value="" name="email" type="text " class="form-control ">
+                                </div>
+                            </div>
+
+                            <div class="form-group ">
+                                <label class="label ">Address</label>
+                                <textarea id="inputAddress" name="address" class="form-control " required rows='3'></textarea>
+                            </div>
+                            <div class="form-group ">
+                                <label class="label ">Thành phố/tỉnh</label>
+                                <select id="provinceId" name="provinceId" class="form-select " aria-label="Default select example "  onchange="getDistricts()">
+                                    <option value="-1" name='defaul'>-- Choose Province --</option>
+                                    <option th:each="tinh: ${listTinh}" th:attr="value=${tinh.dictItemId}" th:text="${tinh.itemName}"></option>
+                                </select>
+                            </div>
+                            <div class="form-group "  id="districtContainer">
+                                <label class="label ">Quận/huyện</label>
+                                <select id="districtId" name="districtId"  onchange="getWards()">
+                                    <option name='defaul' value="0">-- Choose District --</option>
+                                    <option value="-1">CG</option>
+                                </select>
+                            </div>
+                            <div class="form-group ">
+                                <label class="label ">Xã/Phường</label>
+                                <select id="wardId" name="wardId">
+                                    <option value="0" name='defaul'>-- Choose Ward --</option>
+                                    <option value="-1">DL</option>
+                                </select>
+
+                            </div>
+
+<!--                            <div class="form-group ">-->
+<!--                                <label class="label ">Quận/huyện</label>-->
+<!--                                <select name="districtId" class="form-select " aria-label="Default select example ">-->
+<!--                                    <option th:each="huyen: ${listHuyen}" th:attr="value=${huyen.dictItemId}" th:text="${huyen.itemName}"></option>-->
+<!--&lt;!&ndash;                                    <option value="2">Nhân viên</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <option value="3">Khách hàng</option>&ndash;&gt;-->
+<!--                                </select>-->
+<!--                            </div>-->
+
+<!--                            <div class="form-group ">-->
+<!--                                <label class="label ">Phường/xã</label>-->
+<!--                                <select name="wardId" class="form-select " aria-label="Default select example ">-->
+<!--                                    <option th:each="xa: ${listXa}" th:attr="value=${xa.dictItemId}" th:text="${xa.itemName}"></option>-->
+<!--&lt;!&ndash;                                    <option value="1">Quản lý</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <option value="2">Nhân viên</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <option value="3">Khách hàng</option>&ndash;&gt;-->
+<!--                                </select>-->
+<!--                            </div>-->
+
+
+                        </div>
+                        <div class="modal-footer ">
+                            <input type='submit' class="btn-product " value="Edit ">
+                            <input style="display: none " type='text' value="${index} " name="index ">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <header class="header">
+            <div class="grid__full-width">
+
+
+                <div class="header_navar-background">
+
+                    <nav class="header__navbar ">
+
+                        <span class="header__navbar--item-1">
+                            Trùm giày thể thao Adidas, Nike Kids - Capvirgo.com
+                        </span>
+
+
+                        <div class="header__navbar--phone">
+                            <div class="header__navbar--phone-item">
+                                <i class="fa-solid fa-phone header__navbar--img"></i>
+                            </div>
+                            <div class="header__navbar--phone-number">
+                                <span class="header__navbar--phone"> 0865.431.963</span>
+                            </div>
+                        </div>
+
+                        <ul class="header__navbar--list">
+                            <li class="header__navbar--item" style="margin-right: 15px;">
+                                Thứ 2-CN : 8h-21h30
+                            </li>
+                            <a href="/myAccount" class="header__navbar--item">Quản lý tài khoản</a>
+                            <a href="/logout"  class="header__navbar--item">Đăng xuất</a>
+                            <!-- <li class="header__navbar-item-user">
+                                <div class="header__navbar-item-user-name">
+                                    <span class="header__navbar-item-user-name-Name">Tâm Nguyễn</span>
+                                    <div class="header__navbar-item-user-name-list">
+                                        <ul class="header__navbar-item-user-name-list1">
+                                            <li class="header__navbar-item-user-name-list1-item">
+                                                <a href="" class="header__navbar-item-user-name-list1-item-link">
+                                                    Tài khoản của tôi
+                                                </a>
+                                            </li>
+                                            <li class="header__navbar-item-user-name-list1-item">
+                                                <a href="" class="header__navbar-item-user-name-list1-item-link">
+                                                    Đơn mua
+                                                </a>
+                                            </li>
+                                            <li class="header__navbar-item-user-name-list1-item">
+                                                <a href="" class="header__navbar-item-user-name-list1-item-link">
+                                                    Đăng xuất
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li> -->
+                        </ul>
+
+                    </nav>
+                </div>
+                <div class="header-with-seach-background">
+                    <div class="header-with-seach">
+                        <div class="header__logo">
+                            <img src="/image/logo-3.png" alt="" class="header__logo-img">
+                        </div>
+
+
+                        <div class="header__seach">
+                            <form active="" method="post" class="header__seach-wrap" id='header-seach'>
+                                <input type="text" class="header__seach-input" placeholder="Tìm kiếm sản phẩm">
+
+                                <div class="header_seach-history">
+                                    <h3 class="header__seach-history-heading">
+                                        Sản phẩm
+                                    </h3>
+                                    <ul class="header__seach-history-list">
+                                        <li class="header__seach-history-item">
+                                            <a href="" class="header__seach-history-item-link" title="Giày Nike Jordan 1 Low - Light Smoke Grey rep 1:1 1:1 1:1">
+
+                                                <img src="https://capvirgo.com/wp-content/uploads/2022/03/28482a09-300x300.jpg?v=1646128657" alt="" class="header__seach-history-item-img">
+                                                <div class="header__seach-history-item-product">
+                                                    <span class="header__seach-history-item-product-name">
+                                                        Giày Nike Jordan 1 Low - Light Smoke Grey rep 1:1 1:1 1:1
+                                                    </span>
+                                                    <div class="header__seach-history-item-product-price">
+                                                        <span>890.000</span>
+                                                        <span class="header__seach-history-item-product-price-item">đ</span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+
+                                        <li class="header__seach-history-item">
+                                            <a href="" class="header__seach-history-item-link" title="Giày Nike Jordan 1 Low - Light Smoke Grey rep 1:1 1:1 1:1">
+
+                                                <img src="https://capvirgo.com/wp-content/uploads/2022/03/28482a09-300x300.jpg?v=1646128657" alt="" class="header__seach-history-item-img">
+                                                <div class="header__seach-history-item-product">
+                                                    <span class="header__seach-history-item-product-name">
+                                                        Giày Nike Jordan 1 Low - Light Smoke Grey rep 1:1 1:1 1:1
+                                                    </span>
+                                                    <div class="header__seach-history-item-product-price">
+                                                        <span>890.000</span>
+                                                        <span class="header__seach-history-item-product-price-item">đ</span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+
+                                        <li class="header__seach-history-item">
+                                            <a href="" class="header__seach-history-item-link" title="Giày Nike Jordan 1 Low - Light Smoke Grey rep 1:1 1:1 1:1">
+
+                                                <img src="https://capvirgo.com/wp-content/uploads/2022/03/28482a09-300x300.jpg?v=1646128657" alt="" class="header__seach-history-item-img">
+                                                <div class="header__seach-history-item-product">
+                                                    <span class="header__seach-history-item-product-name">
+                                                        Giày Nike Jordan 1 Low - Light Smoke Grey rep 1:1 1:1 1:1
+                                                    </span>
+                                                    <div class="header__seach-history-item-product-price">
+                                                        <span>890.000</span>
+                                                        <span class="header__seach-history-item-product-price-item">đ</span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <button class="header__seach-btn">
+                                        Tìm kiếm
+                                    </button>
+                            </form>
+                        </div>
+
+
+
+                        <div class="header__cart">
+                            <div class="header__cart-wrap">
+                                <img src="/image/icons8-cart-64.png" style="width: 35px;">
+                                <span class="header__cart-wrap-icon">giỏ hàng của bạn</span>
+                                <div class="header__cart-list">
+                                    <!-- <span class="header__cart-list-no-cart-msg">Chưa có sản phẩm</span> -->
+
+                                    <h4 class="header_cart-heading">Sản phẩm đã thêm</h4>
+                                    <ul class="header_cart-list-item">
+                                        <li class="header_cart-item">
+                                            <img src="https://capvirgo.com/wp-content/uploads/2022/03/3ae2b8dc-300x300.jpg?v=1646128970" alt="" class="header_cart-img">
+                                            <div class="header_cart-item-info">
+
+                                                <div class="header_cart-item-head">
+                                                    <h5 class="header_cart-item-name">Giày trẻ em Air Jordan 4 màu hồng </h5>
+
+                                                    <div class="header_cart-item-price-wrap">
+                                                        <span class="header_cart-item-price">200.000đ</span>
+                                                        <span class="header_cart-item-multiply">x</span>
+                                                        <span class="header_cart-item-qbt">2</span>
+                                                    </div>
+                                                </div>
+                                                <div class="header_cart-item-body">
+
+
+                                                    <span class="header_cart-item-remove">Xóa</span>
+                                                </div>
+
+                                            </div>
+
+                                        </li>
+
+                                        <li class="header_cart-item">
+                                            <img src="https://capvirgo.com/wp-content/uploads/2022/03/3ae2b8dc-300x300.jpg?v=1646128970" alt="" class="header_cart-img">
+                                            <div class="header_cart-item-info">
+
+                                                <div class="header_cart-item-head">
+                                                    <h5 class="header_cart-item-name">Giày trẻ em Air Jordan 4 màu trắng sữa</h5>
+
+                                                    <div class="header_cart-item-price-wrap">
+                                                        <span class="header_cart-item-price">200.000đ</span>
+                                                        <span class="header_cart-item-multiply">x</span>
+                                                        <span class="header_cart-item-qbt">2</span>
+                                                    </div>
+                                                </div>
+                                                <div class="header_cart-item-body">
+
+
+                                                    <span class="header_cart-item-remove">Xóa</span>
+                                                </div>
+
+                                            </div>
+
+
+                                        </li>
+
+                                        <li class="header_cart-item">
+                                            <img src="https://capvirgo.com/wp-content/uploads/2022/03/3ae2b8dc-300x300.jpg?v=1646128970" alt="" class="header_cart-img">
+                                            <div class="header_cart-item-info">
+
+                                                <div class="header_cart-item-head">
+                                                    <h5 class="header_cart-item-name">Giày trẻ em adidas Superstar Shell Head dán dính trắng sọc xanh</h5>
+
+                                                    <div class="header_cart-item-price-wrap">
+                                                        <span class="header_cart-item-price">200.000đ</span>
+                                                        <span class="header_cart-item-multiply">x</span>
+                                                        <span class="header_cart-item-qbt">2</span>
+                                                    </div>
+                                                </div>
+                                                <div class="header_cart-item-body">
+
+                                                    <span class="header_cart-item-remove">Xóa</span>
+                                                </div>
+
+                                            </div>
+
+                                        </li>
+
+                                    </ul>
+                                    <a href="" class="header_cart-view-cart btn btn--primary1">Xem giỏ hàng</a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="header_filter-background">
+
+                    <div class="header-filter">
+                        <div class="home-filter">
+
+                            <div class="home__heading " onclick="solveCategory(this)">
+                                <h3 class="home-category "> DANH MỤC SẢN PHẨM</h3>
+                                <i class="home__heading-icon fas fa-bars "></i>
+                                <div class="grid__column-2-1 ">
+                                    <div class="category-nth-1 ">
+
+
+                                        <ul class="category-list ">
+                                            <li class="category-item "  th:each="category : ${categories}">
+                                                <img th:src="${category.picture}" class="category-item-img ">
+                                                <a  th:attr="href='/admin/index1?categoryid='+${category.categoryId}" class="category-item__link " th:text="${category.name}">
+
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <a href="/admin/index1" class="home-heading-btn ">
+                                 TRANG CHỦ
+                            </a>
+
+                            <a href="/admin/managerProductAdmin" class="home-heading-btn ">
+                                 QUẢN LÝ SẢN PHẨM
+                            </a>
+
+                            <a href="/admin/managerUserAdmin" class="home-heading-btn ">
+                                 QUẢN LÝ NGƯỜI DÙNG
+                            </a>
+
+                            <a href="/viewOrderStaff" class="home-heading-btn ">
+                                XEM CÁC ĐƠN HÀNG
+                            </a>
+
+                            <div class="home__heading-menu " style="right: 0;cursor: pointer; " onclick="solve(this) ">
+                                <i class="home__heading-icon fas fa-bars " style="margin: 0 10px 0 10px; "></i>
+                                <h3 class="home-category "> MENU</h3>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </header>
+        <div class="container ">
+            <div class="modal_black ">
+            </div>
+
+            <div class="grid " style="width: 1150px; ">
+                <div class="grid__row ">
+                   <div class="cart " style="min-height: 400px; ">
+                        <h1 class="cart-heading ">QUẢN LÝ NGƯỜI DÙNG</h1>
+
+                        <div class="cart-heading-button ">
+                            <button class="button-item " onclick="addProduct() " style="background-color: var(--primary-color); color: var(--while-color); "> Thêm người dùng </button>
+                            <button class="button-item " onclick="editProduct() " style="background-color: var(--primary-color); color: var(--while-color); ">Sửa thông tin</button>
+                            <button class="button-item " onclick="removeProduct() " style="background-color: var(--primary-color); color: var(--while-color); ">Xóa tài khoản</button>
+                        </div>
+
+                        <h1 id="search " class="cart-heading " style="display: none; ">Kết quả tìm kiếm '   ' </h1>
+
+                        <div class="cart-detail " style="display: none; ">
+                            <table class="cart-table ">
+                                <thead class="cart-table-head ">
+                                    <th style="width: 7%; "></th>
+                                    <th style="width: 15%; padding-left: 10px; ">Name</th>
+                                    <th style="width: 16%;padding-left: 10px; ">UserName</th>
+                                    <th style="width: 17%; padding-left: 10px; ">PassWord</th>
+                                    <th style="width: 17%; padding-left: 10px; ">Phone</th>
+                                    <th style="width: 27%; padding-left: 10px; ">Address</th>
+                                </thead>
+                                <tbody>
+                                    <tr class="cart-table-tr " style="min-height: 70px;" th:each="cus : ${customers}">
+                                        <td class="cart-table-td ">
+                                            <div class="cart-icon ">
+                                                <i class='fas fa-highlighter edit'
+                                                   th:attr="cusId=${cus.customerId},
+                                                 name=${cus.name},
+                                                 phone=${cus.phone},
+                                                 password=${cus.password},
+                                                 birthday=${cus.birthday},
+                                                 email=${cus.email},
+                                                 address=${cus.address},
+                                                 provinceid=${cus.provinceId},
+                                                 districtid=${cus.districtId},
+                                                 wardid=${cus.wardId}"
+                                                   onclick='chooseProduct(this)'></i>
+                                                <input type='checkbox' class="checkbox " name="select[]" th:attr="value=${cus.customerId}">
+                                            </div>
+                                        </td>
+                                        <td >
+                                            <div class="cart-product ">
+                                                <div class="cart-product-link ">
+                                                    <span class="cart-product-link-name ">Name:</span>
+                                                    <span class="cart-product-name " th:text="${cus.name}"></span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="cart-table-td " >
+                                            <div class="cart-product ">
+                                                <div class="cart-product-link ">
+                                                    <span class="cart-product-link-name ">Email:</span>
+                                                    <span class="cart-product-name " th:text="${cus.email}"></span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td >
+                                            <div class="cart-product ">
+                                                <div class="cart-product-link ">
+                                                    <span class="cart-product-link-name ">PassWord:</span>
+                                                    <span class="cart-product-name " th:text="${cus.password}"></span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="cart-product-price-nth ">
+                                                <span class="cart-product-price-nth-link ">Phone:</span>
+                                                <div class="cart-product-price " th:text="${cus.phone}">
+
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="cart-product-price-nth ">
+                                                <span class="cart-product-price-nth-link ">Addrress:</span>
+                                                <div class="cart-product-price " th:text="${cus.address}">
+
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+<!--                                    <tr class="cart-table-tr " style="min-height: 70px; ">-->
+<!--                                        <td class="cart-table-td ">-->
+<!--                                            <div class="cart-icon ">-->
+<!--                                                <i class='fas fa-highlighter edit' onclick='chooseProduct()'></i>-->
+<!--                                                <input type='checkbox' class="checkbox ">-->
+<!--                                            </div>-->
+<!--                                        </td>-->
+<!--                                        <td >-->
+<!--                                            <div class="cart-product ">-->
+<!--                                                <div class="cart-product-link ">-->
+<!--                                                    <span class="cart-product-link-name ">Name:</span>-->
+<!--                                                    <span class="cart-product-name ">Nguyễn Văn An</span>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </td>-->
+<!--                                        <td class="cart-table-td " >-->
+<!--                                            <div class="cart-product ">-->
+<!--                                                <div class="cart-product-link ">-->
+<!--                                                    <span class="cart-product-link-name ">UserName:</span>-->
+<!--                                                    <span class="cart-product-name ">An Nguyễn</span>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </td>-->
+<!--                                        <td >-->
+<!--                                            <div class="cart-product ">-->
+<!--                                                <div class="cart-product-link ">-->
+<!--                                                    <span class="cart-product-link-name ">PassWord:</span>-->
+<!--                                                    <span class="cart-product-name ">12345678</span>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </td>-->
+<!--                                        <td>-->
+<!--                                            <div class="cart-product-price-nth ">-->
+<!--                                                <span class="cart-product-price-nth-link ">Phone:</span>-->
+<!--                                                <div class="cart-product-price ">-->
+<!--                                                    0978525442-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </td>-->
+<!--                                        <td>-->
+<!--                                            <div class="cart-product-price-nth ">-->
+<!--                                                <span class="cart-product-price-nth-link ">Addrress:</span>-->
+<!--                                                <div class="cart-product-price ">-->
+<!--                                                   Tòa B2 Học viện Bưu chính Viễn Thông, Phường Mỗ Lao, Quận Hà Đông , Tỉnh Hà Nội-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                    -->
+<!--                                    <tr class="cart-table-tr " style="min-height: 70px; ">-->
+<!--                                        <td class="cart-table-td ">-->
+<!--                                            <div class="cart-icon ">-->
+<!--                                                <i class='fas fa-highlighter edit' onclick='chooseProduct()'></i>-->
+<!--                                                <input type='checkbox' class="checkbox ">-->
+<!--                                            </div>-->
+<!--                                        </td>-->
+<!--                                        <td >-->
+<!--                                            <div class="cart-product ">-->
+<!--                                                <div class="cart-product-link ">-->
+<!--                                                    <span class="cart-product-link-name ">Name:</span>-->
+<!--                                                    <span class="cart-product-name ">Nguyễn Văn An</span>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </td>-->
+<!--                                        <td class="cart-table-td " >-->
+<!--                                            <div class="cart-product ">-->
+<!--                                                <div class="cart-product-link ">-->
+<!--                                                    <span class="cart-product-link-name ">UserName:</span>-->
+<!--                                                    <span class="cart-product-name ">An Nguyễn</span>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </td>-->
+<!--                                        <td >-->
+<!--                                            <div class="cart-product ">-->
+<!--                                                <div class="cart-product-link ">-->
+<!--                                                    <span class="cart-product-link-name ">PassWord:</span>-->
+<!--                                                    <span class="cart-product-name ">12345678</span>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </td>-->
+<!--                                        <td>-->
+<!--                                            <div class="cart-product-price-nth ">-->
+<!--                                                <span class="cart-product-price-nth-link ">Phone:</span>-->
+<!--                                                <div class="cart-product-price ">-->
+<!--                                                    0978525442-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </td>-->
+<!--                                        <td>-->
+<!--                                            <div class="cart-product-price-nth ">-->
+<!--                                                <span class="cart-product-price-nth-link ">Addrress:</span>-->
+<!--                                                <div class="cart-product-price ">-->
+<!--                                                   Tòa B2 Học viện Bưu chính Viễn Thông, Phường Mỗ Lao, Quận Hà Đông , Tỉnh Hà Nội-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+                                    <tr class ="row-last ">
+                                        <td colspan="6 " style="text-align:unset; border-bottom: 2px solid var(--border-color); "> 
+                                            <div class="cart-button-update-nth " style="display: flex;justify-content: space-evenly; ">
+                                                <button class="cart-buttton-update " >Hủy</button> 
+                                                <button class="cart-buttton-update " >Hủy</button> 
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                   </div>
+                </div>
+
+            </div>
+        </div>
+        <footer class="footer ">
+            <div class="grid ">
+                <div class="grid__row ">
+                    <div class="grid__column-2-5-nth ">
+                        <h3 class="footer_heding ">Chăm sóc khách hàng </h3>
+                        <ul class="footer-list ">
+                            <li class="footer-list-item ">
+                                <a href=" " class="footer-list-item-link ">Trung Tâm Trợ Giúp</a>
+
+                            </li>
+                            <li class="footer-list-item ">
+                                <a href=" " class="footer-list-item-link ">Hướng Dẫn Mua Hàng</a>
+
+                            </li>
+                            <li class="footer-list-item ">
+                                <a href=" " class="footer-list-item-link ">Vận Chuyển</a>
+                            </li>
+                            <li class="footer-list-item ">
+                                <a href=" " class="footer-list-item-link ">Trả Hàng & Hoàn Tiền</a>
+
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="grid__column-2-5-nth ">
+                        <h3 class="footer_heding ">Về shop </h3>
+                        <ul class="footer-list ">
+                            <li class="footer-list-item ">
+                                <a href=" " class="footer-list-item-link ">Giới Thiệu</a>
+                            </li>
+                            <li class="footer-list-item ">
+                                <a href=" " class="footer-list-item-link ">Chính Sách Bảo Mật</a>
+
+                            </li>
+                            <li class="footer-list-item ">
+                                <a href=" " class="footer-list-item-link ">Chính Hãng</a>
+
+                            </li>
+                            <li class="footer-list-item ">
+                                <a href=" " class="footer-list-item-link ">Flash Sales</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="grid__column-2-5-nth ">
+                        <h3 class="footer_heding ">Danh mục </h3>
+                        <ul class="footer-list ">
+                            <li class="footer-list-item ">
+                                <a href=" " class="footer-list-item-link ">Sảm Phẩm Mới Nhất</a>
+
+                            </li>
+                            <li class="footer-list-item ">
+                                <a href=" " class="footer-list-item-link ">Xả hàng</a>
+
+                            </li>
+                            <li class="footer-list-item ">
+                                <a href=" " class="footer-list-item-link ">Ưu Đãi Khách Hàng</a>
+
+                            </li>
+                            <li class="footer-list-item ">
+                                <a href=" " class="footer-list-item-link ">Yêu Cầu Trợ Giúp</a>
+
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="grid__column-2-5-nth ">
+                        <h3 class="footer_heding ">Theo dõi </h3>
+                        <ul class="footer-list ">
+                            <li class="footer-list-item ">
+                                <i class="footer-list-item-icon fab fa-facebook "></i>
+                                <a href=" " class="footer-list-item-link ">Facebook</a>
+                            </li>
+
+                            <li class="footer-list-item ">
+                                <i class="footer-list-item-icon fab fa-instagram-square "></i>
+                                <a href=" " class="footer-list-item-link ">Instagram</a>
+                            </li>
+                        </ul>
+                    </div>
+
+
+
+                </div>
+            </div>
+            <div class="grid__full-width " >
+                <div class="footer__bottom ">
+                    <p class="footer__text "> 2022 - Bản quyền thuộc Cavirgo.com</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="/js/index1.js "></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        var check = 0;
+        var checkCategory=0;
+        var checkAdd =0;
+        var checkEdit =0;
+        var checkRemove =0;
+        // Search('#header-seach')
+        // Active('.home-filter')
+        // Cart('.header__cart-list')
+        Category('.home__heading')
+        // ViewImage('.img')
+        ChooseSize('.product-buy')
+        Sticky('.header_filter-background')
+        // Menu('.home__heading--category')
+
+        function solve(event) {
+            if(checkCategory===1){
+                document.querySelector(".grid__column-2-1 ").style.display = "none ";
+                checkCategory=0;
+            }
+            var list = document.querySelectorAll(".home-heading-btn ");
+            if (check === 0) {
+                for (var items of list) {
+                    items.style.height = '30px';
+                }
+                check = 1;
+            } else {
+                for (var items of list) {
+                    items.style.height = "0px ";
+                }
+                check = 0;
+            }
+        };
+        window.onresize = function(){
+            var screenX = window.innerWidth;
+            if(screenX<700){
+                var list = document.querySelectorAll(".home-heading-btn ");
+                for (var items of list) {
+                    items.style.height = "0px ";
+                }
+            }
+            var list = document.querySelectorAll(".home-heading-btn ");
+            if (screenX>700) {
+                for (var items of list) {
+                    items.style.height = "40px ";
+                }
+                document.querySelector(".grid__column-2-1 ").style.display = "none ";
+                document.querySelector(".grid__column-2-1 ").style.width = "24% ";
+            }
+        }
+        function solveCategory(event) {
+            var screenX = window.innerWidth;
+            if(screenX<700){
+                if(check===1){
+                    var list = document.querySelectorAll(".home-heading-btn ");
+                    for (var items of list) {
+                        items.style.height = "0px ";
+                    }
+                    check = 0;
+                }
+
+                if (checkCategory===0){
+                    document.querySelector(".grid__column-2-1 ").style.display = "flex ";
+                    var x = window.innerWidth-15;
+                    document.querySelector(".grid__column-2-1 ").style.width = x.toString() + "px ";
+                    checkCategory=1;
+                }
+                else{
+                    document.querySelector(".grid__column-2-1 ").style.display = "none ";
+                    checkCategory=0;
+                }
+            }
+
+        }
+
+        function getDistricts() {
+          var provinceId = $('#provinceId').val();
+          if (provinceId) {
+            $.ajax({
+              url: '/region/' + provinceId,
+              type: 'GET',
+              dataType: 'json',
+              success: function(data) {
+                $('#districtId').empty().append('<option value="">-- Choose District --</option>');
+                $.each(data, function(index, district) {
+                    $('#districtId').append('<option value="' + district.dictItemId + '">' + district.itemName + '</option>');
+                });
+              },
+              error: function() {
+                $('#districtId').empty().append('<option value="">-- Choose District --</option>');
+              }
+            });
+          } else {
+            $('#districtId').empty().append('<option value="">-- Choose District --</option>');
+            $('#wardId').empty().append('<option value="">-- Choose Ward --</option>');
+          }
+
+        }
+
+        function getWards() {
+          var districtId = $('#districtId').val();
+          if (districtId) {
+            $.ajax({
+              url: '/region/' + districtId,
+              type: 'GET',
+              dataType: 'json',
+              success: function(data) {
+                $('#wardId').empty().append('<option value="">-- Choose ward --</option>');
+                $.each(data, function(index, district) {
+                    $('#wardId').append('<option value="' + district.dictItemId + '">' + district.itemName + '</option>');
+                });
+              },
+              error: function() {
+                $('#wardId').empty().append('<option value="">-- Choose Ward --</option>');
+              }
+            });
+          } else {
+
+            $('#wardId').empty().append('<option value="">-- Choose Ward --</option>');
+          }
+        }
+
+        function chooseProduct(element){
+
+            var inputId = document.getElementById("inputId");
+            inputId.value = element.getAttribute("cusId");
+            console.log(element.getAttribute("cusId"));
+
+            var inputName = document.getElementById("inputName");
+            inputName.value = element.getAttribute("name");
+
+            var inputDiscount = document.getElementById("inputPhone");
+            inputDiscount.value = element.getAttribute("phone");
+
+            var inputPrice = document.getElementById("inputPass");
+            inputPrice.value = element.getAttribute("password");
+
+            var inputbirth = document.getElementById("inputBirthday");
+            const date = new Date(1004054400000);
+            if (isNaN(date.getTime())) {
+              console.log("Invalid date");
+            } else {
+              const day = date.getDate().toString().padStart(2, '0');
+              const month = (date.getMonth() + 1).toString().padStart(2, '0');
+              const year = date.getFullYear().toString();
+              console.log(`${day}/${month}/${year}`);
+              inputbirth.value = `${year}-${month}-${day}`;
+            }
+
+            console.log(element.getAttribute("birthday"));
+            console.log(element.getAttribute("birthday"));
+
+
+            var inputSize = document.getElementById("inputEmail");
+            inputSize.value = element.getAttribute("email");
+
+            var inputSupplier = document.getElementById("inputAddress");
+            inputSupplier.value = element.getAttribute("address");
+
+
+
+
+            var inputProvince = document.getElementById("provinceId").querySelector("option[value='"+element.getAttribute("provinceid")+"']");
+            inputProvince.selected = true;
+
+
+            console.log(element.getAttribute("districtid"));
+
+
+            var inputDistrict = document.getElementById("districtId").querySelector('option[value="-1"]');
+            inputDistrict.selected = true;
+
+            //var inputBrand = document.getElementById("districtId").querySelector("option[value='"+element.getAttribute("districtid")+"']");
+            //inputBrand.selected = true;
+            //getWards();
+
+            var inputSupplier = document.getElementById("wardId").querySelector('option[value="-1"]');
+            inputSupplier.selected = true;
+
+            var myForm = document.getElementById("formEditCus");
+            myForm.action = "editcustomer";
+
+
+            document.querySelector(".editEmployeeModal ").style.display = 'block';
+
+
+        }
+
+        manager('.cart-heading-button','Add User','Edit User')
+    </script>
+</body>
+
+</html>

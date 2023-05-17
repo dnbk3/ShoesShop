@@ -1,0 +1,251 @@
+{
+	"info": {
+		"_postman_id": "42282e5d-2f4d-4995-98ed-eeed13cd28a6",
+		"name": "HDV -Authen",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21824934",
+		"_collection_link": "https://lively-space-127763.postman.co/workspace/HDV~990c252a-8bc7-438b-8e09-b971df5fd54e/collection/21824934-42282e5d-2f4d-4995-98ed-eeed13cd28a6?action=share&creator=21824934&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "tạo otp",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"type\": \"REGISTRATION\",\r\n  \"username\": \"tam99616@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8082/auth/v2/otp/generate",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"auth",
+						"v2",
+						"otp",
+						"generate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "tạo lại otp",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"otpReferenceId\": \"9cd43385-3b95-4577-9e15-e7fbbe4082ab\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8082/auth/v2/otp/regenerate",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"auth",
+						"v2",
+						"otp",
+						"regenerate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "xác thực otp",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"otpCode\": \"875499\",\r\n  \"otpReferenceId\": \"14f91671-ff9f-4c68-895a-0c0b10977370\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8082/auth/v2/otp/verify",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"auth",
+						"v2",
+						"otp",
+						"verify"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "đăng ký tài khoản",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"tam\",\r\n  \"otpReferenceId\": \"14f91671-ff9f-4c68-895a-0c0b10977370\",\r\n  \"password\": \"123456\",\r\n  \"username\": \"tam99616@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8082/auth/v2/user/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"auth",
+						"v2",
+						"user",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"password\": \"123456\",\r\n  \"username\": \"tam99616@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8082/auth/v2/user/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"auth",
+						"v2",
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "quên mật khẩu",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"newPassword\": \"1234567\",\r\n  \"otpReferenceId\": \"a17f205e-78c0-41aa-a08f-8fbdaacc1245\",\r\n  \"username\": \"0987654321\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8082/auth/v2/user/forget-password",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"auth",
+						"v2",
+						"user",
+						"forget-password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "thay đổi mật khẩu",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"newPassword\": \"123456\",\r\n  \"oldPassword\": \"1234567\",\r\n  \"username\": \"0987654321\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "162.254.33.245:8082/auth/v2/user/change-password",
+					"host": [
+						"162",
+						"254",
+						"33",
+						"245"
+					],
+					"port": "8082",
+					"path": [
+						"auth",
+						"v2",
+						"user",
+						"change-password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logout",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwidXNlcl9pZCI6IjEiLCJwaG9uZSI6IjA5ODc2NTQzMjEiLCJleHAiOjE2ODQxNzY0MDcsImlhdCI6MTY4MTU4NDQwNywiZW1haWwiOm51bGx9.h0MoY-yS46NzlpdICti2gdWBZYqgdZ1tM7f5ZMfADD9N3gWdfVk_xlPEgbpdpuU9BJY9AUCodeyMyo6ybTslKA",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8082/auth/v2/user/logout",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"auth",
+						"v2",
+						"user",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

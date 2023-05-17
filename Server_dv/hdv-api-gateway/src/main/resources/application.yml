@@ -1,0 +1,91 @@
+server:
+  port: 8082
+  error:
+    include-stacktrace: on_param
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8083/eureka/
+
+    enabled: true
+
+spring:
+  application:
+    name: api-gateway
+
+  session:
+    store-type: redis
+
+  r2dbc:
+    pool:
+      enabled: true
+      initial-size: 50
+      max-size: 100
+      max-acquire-time: 100s
+      max-idle-time: 10s
+
+    url: jdbc:mysql://localhost:3306/huongdichvu
+    username: root
+    password: 19042001
+
+  redis:
+    host: redis-15613.c299.asia-northeast1-1.gce.cloud.redislabs.com
+    port: 15613
+    password: ngRxttBRIsNUBy4qL2wCL9IX71TtZ7b8
+  cloud:
+    gateway:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_LAST
+        - AddRequestHeader=system, bnpl
+        - name: RequestSize
+          args:
+            maxSize: 20000000
+        - name: Log
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowed-headers: "*"
+      routes:
+        - id: core-swagger
+          uri: http://localhost:8002
+          predicates:
+            - Path=/core/swagger-ui/**,/core/swagger-resources/**,/core/swagger-ui.html,/core/v2/api-docs,/core/webjars/**,/core/view/**
+        - id: core-service
+          order: 10
+          uri: http://localhost:8002
+          predicates:
+            - Path=/core/**
+          filters:
+            - RewritePath=/auth/(?<segment>.*),/customers/$\{segment}
+        - id: auth-service
+          order: 1
+          uri: http://localhost:8010
+          predicates:
+            - Path=/auth/**
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+logging:
+  level:
+    org.springframework.cloud.gateway: info
+    sql: info
+    org.springframework.r2dbc: info
+    web: info
+
+
+jwt:
+  token:
+    validity: 12345678
+
+
+  secret: VkAXvlw5xd4
+
+gateway:
+  api:
+    public: /core/product/get-all,/core/product/get-by-categoryId,/core/product/{productId:\d+},/core/product/top,/core/product/search,/core/product/{productId:\d+}/related,/core/v2/api-docs,/core/swagger-resources,/core/swagger-resources/**,/core/configuration/ui,/core/configuration/security,/core/swagger-ui.html,/core/webjars/**,/core/v3/api-docs/**,/core/swagger-ui/**,/core/v2/api-docs,/*/shops/{shopId:\d+}/{fileId:\d+}/viewFile,/v2/api-docs,/swagger-resources,/swagger-resources/**,/configuration/ui,/configuration/security,/swagger-ui.html,/webjars/**,/v3/api-docs/**,/swagger-ui/**,/config/**,/auth/register,/auth/forgot-pass,/auth/login,/auth/change_password,/auth/forgot-password,/auth/reset_password,/auth/reset-password,/auth/otp/generate,/auth/otp/verify,/auth/otp/regenerate,/files/,/*/shops/{shopId:\d+}/files/**,GET|||/shops/profile/{shopId:\d+}/avatar,GET|||/shops/profile/{shopId:\d+}/banner,GET|||/customers/{customerId:\d+}/avatar,/avatar,/auth/v2/user/change-password,/auth/v2/user/create-user,/auth/v2/user/forget-password,/auth/v2/user/login,/auth/v2/user/register,/auth/v2/otp/generate,/auth/v2/otp/regenerate,/auth/v2/otp/verify,/cms/swagger-ui/**,/cms/swagger-resources/**,/cms/swagger-ui.html,/cms/v2/api-docs,/cms/webjars/**,/cms/view/**
+
